@@ -1,5 +1,13 @@
-* { box-sizing: border-box; }
-html, body { height: 100%; margin: 0; }
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
 body {
   font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
   -webkit-font-smoothing: antialiased;
@@ -23,12 +31,31 @@ body {
   font-size: clamp(1rem, 3.5vw, 2rem);
   font-weight: 600;
   color: white;
-  background: linear-gradient(135deg, #5b86e5 0%, #36d1dc 100%);
+  --progress: calc((sibling-index() - 1) / (sibling-count() - 1));
+  background-color: oklch(
+    calc(40% + var(--progress) * 40%)
+    0.2
+    270deg
+  );
   border-radius: 8px;
-  box-shadow: 0 6px 18px rgba(20,30,60,0.12);
+  box-shadow: 0 6px 18px rgba(20, 30, 60, 0.12);
   user-select: none;
+  scale: 0.5;
+  opacity: 0;
+  animation: popIn 0.5s ease-out forwards;
+  animation-delay: calc((sibling-index() - 1) * 50ms) ;
 }
 
 @media (max-width: 520px) {
-  .grid { gap: 0.75rem; padding: 0.75rem; }
+  .grid {
+    gap: 0.75rem;
+    padding: 0.75rem;
+  }
+}
+
+@keyframes popIn {
+  to {
+    scale: 1;
+    opacity: 1;
+  }
 }
